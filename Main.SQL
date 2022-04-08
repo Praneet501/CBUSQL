@@ -60,6 +60,21 @@ CREATE INDEX `user_type_id_idx` ON `Freelance`.`freelance_account` (`user_type_i
 
 SHOW WARNINGS;
 
+DROP TABLE IF EXISTS `Freelance`.`freelance_services` ;
+SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `Freelance`.`service` (
+  `service_id` INT NOT NULL,
+  `category` VARCHAR(45) NULL,
+  `service_name` VARCHAR(45) NULL,
+  `service_description` VARCHAR(45) NULL,
+  `createdby` VARCHAR(45) NULL,
+  `created_date` VARCHAR(45) NULL,
+  `updatedby` VARCHAR(45) NULL,
+  `updated_date` VARCHAR(45) NULL,
+  PRIMARY KEY (`service_id`))
+ENGINE = InnoDB;
+
+
 -- -----------------------------------------------------
 -- Table `Freelance`.`freelance_services`
 -- -----------------------------------------------------
@@ -67,7 +82,7 @@ DROP TABLE IF EXISTS `Freelance`.`freelance_services` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `Freelance`.`freelance_services` (
-  `service_id` INT NOT NULL,
+  `freelance_service_id` INT NOT NULL,
   `freelance_Id` INT NULL,
   `salary_per_hour` VARCHAR(4) NULL,
   `background_verified` boolean NULL,
@@ -80,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `Freelance`.`freelance_services` (
   `discount` DECIMAL(10) NULL,
   PRIMARY KEY (`service_id`),
   CONSTRAINT `freelance_Id`
-    FOREIGN KEY (`freelance_Id`)
+    FOREIGN KEY (`freelance_service_id`)
     REFERENCES `Freelance`.`freelance_account` (`freelance_Id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -267,11 +282,34 @@ CREATE INDEX `service_id_idx` ON `Freelance`.`job_status` (`service_id` ASC) VIS
 SHOW WARNINGS;
 USE `Freelance` ;
 
+
+
+
+
 -- -----------------------------------------------------
--- Placeholder table for view `Freelance`.`view1`
+-- Table `Freelance`.`reviews`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Freelance`.`view1` (`id` INT);
-SHOW WARNINGS;
+CREATE TABLE IF NOT EXISTS `Freelance`.`reviews` (
+  `review_id` INT NOT NULL,
+  `job_id` INT NULL,
+  `rating` DECIMAL(2,1) NULL,
+  `comments` NVARCHAR(500) NULL,
+  `posted_date` DATETIME NULL,
+  `updated_date` DATETIME NULL,
+  `is_deleted` TINYINT NULL,
+  `like` INT NULL,
+  `dislike` INT NULL,
+  PRIMARY KEY (`review_id`),
+  INDEX `job_id_idx` (`job_id` ASC) VISIBLE,
+  CONSTRAINT `job_id`
+    FOREIGN KEY (`job_id`)
+    REFERENCES `JOB_PORTAL`.`job_status` (`job_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
 
 -- -----------------------------------------------------
 -- View `Freelance`.`view1`
