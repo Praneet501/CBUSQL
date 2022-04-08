@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `Freelance`.`freelance_services` (
   `price` VARCHAR(45) NULL,
   `rating` DECIMAL(10) NULL,
   `discount` DECIMAL(10) NULL,
-  PRIMARY KEY (`service_id`),
+  PRIMARY KEY (`freelance_service_id`),
   CONSTRAINT `freelance_Id`
     FOREIGN KEY (`freelance_service_id`)
     REFERENCES `Freelance`.`freelance_account` (`freelance_Id`)
@@ -253,7 +253,7 @@ DROP TABLE IF EXISTS `Freelance`.`job_status` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `Freelance`.`job_status` (
   `job_id` INT NOT NULL,
-  `service_id` INT NULL,
+  `freelance_service_id` INT NULL,
   `company_id` INT NULL,
   `start_date` DATE NULL,
   `end_date` DATE NULL,
@@ -266,9 +266,9 @@ CREATE TABLE IF NOT EXISTS `Freelance`.`job_status` (
     REFERENCES `Freelance`.`company_profile` (`company_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `service_id`
-    FOREIGN KEY (`service_id`)
-    REFERENCES `Freelance`.`freelance_services` (`service_id`)
+  CONSTRAINT `freelance_service_id`
+    FOREIGN KEY (`freelance_service_id`)
+    REFERENCES `Freelance`.`freelance_services` (`freelance_service_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -277,7 +277,7 @@ SHOW WARNINGS;
 CREATE INDEX `company_id_idx` ON `Freelance`.`job_status` (`company_id` ASC) VISIBLE;
 
 SHOW WARNINGS;
-CREATE INDEX `service_id_idx` ON `Freelance`.`job_status` (`service_id` ASC) VISIBLE;
+CREATE INDEX `service_id_idx` ON `Freelance`.`job_status` (`freelance_service_id` ASC) VISIBLE;
 
 SHOW WARNINGS;
 USE `Freelance` ;
