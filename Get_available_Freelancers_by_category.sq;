@@ -1,0 +1,15 @@
+	
+/*
+Functionality: Get avaiable freelancer account
+Description: Get the count of available freelancer group by category
+*/
+ USE  freelance;
+ SELECT
+ COUNT(FRE.freelance_id) as Total_Freelancers, SS.category
+ FROM
+ freelance_account FRE
+ LEFT JOIN freelance_services FS ON FS.freelance_Id = FRE.freelance_Id
+ LEFT JOIN service SS ON SS.service_id = FS.service_id
+ WHERE FS.is_available = 1
+ GROUP BY SS.category
+	 
