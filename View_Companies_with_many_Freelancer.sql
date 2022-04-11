@@ -1,5 +1,5 @@
 /*
-Functionality: Get the list of company details those have more than one freelancer hired.
+Functionality: Get the list of company details those have Zero freelancer hired.
 */
 
 CREATE VIEW `Company_Freelance_Count` AS
@@ -9,6 +9,6 @@ LEFT JOIN job_status JS ON CP.company_id = JS.company_id
 LEFT JOIN freelance_services FS ON FS.freelance_service_id = JS.freelance_service_id
 LEFT JOIN freelance_account FA ON FA.freelance_id = FS.freelance_id
 GROUP BY  company_name, Sector_detail, company_website
-HAVING COUNT(FA.freelance_id) > 1
+HAVING COUNT(FA.freelance_id) = 0
 
  
