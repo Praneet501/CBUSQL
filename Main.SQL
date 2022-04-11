@@ -325,3 +325,26 @@ SHOW WARNINGS;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Constraints
+-- -----------------------------------------------------
+
+alter TABLE freelance.freelance_account 
+ADD CONSTRAINT email_constraint CHECK(email like '%_@__%.__%');
+
+use freelance;
+alter TABLE freelance.freelance_account 
+ADD CONSTRAINT password_constraint check(password like '%[0-9]%' and password like '%[A-Z]%' and password like '%[!@#$%a^&*()-_+=.,;:"`~]%' and length(password) >= 8);
+
+use freelance;
+alter TABLE freelance.freelance_account 
+ADD CONSTRAINT dobirth_constraint check(year(current_date()-dob)>=18);
+
+use freelance;
+alter TABLE freelance.freelance_services
+ADD CONSTRAINT salary_constraint check (salary_per_hour>=13);
+
+use freelance;
+alter TABLE freelance.reviews 
+ADD CONSTRAINT rating_constraint check(rating>=1 and rating<=5);
