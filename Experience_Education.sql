@@ -1,5 +1,5 @@
 /*
-Name : Freelancer having no experience or no Education
+Name : Freelancer having experience or Education
 Functionality : Get list of Freelancer having  experience or Education for Background verification for Students
 */
 	
