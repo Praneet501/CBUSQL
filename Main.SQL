@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `Freelance`.`reviews` (
   INDEX `job_id_idx` (`job_id` ASC) VISIBLE,
   CONSTRAINT `job_id`
     FOREIGN KEY (`job_id`)
-    REFERENCES `JOB_PORTAL`.`job_status` (`job_id`)
+    REFERENCES `Freelance`.`job_status` (`job_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
