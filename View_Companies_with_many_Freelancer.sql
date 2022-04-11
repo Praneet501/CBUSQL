@@ -2,6 +2,7 @@
 Functionality: Get the list of company details those have more than one freelancer hired.
 */
 
+CREATE VIEW `Company_Freelance_Count` AS
 SELECT Company_Name, COUNT(FA.freelance_id) as Total_Count, Sector_Detail, Company_Website
 FROM company_profile CP
 LEFT JOIN job_status JS ON CP.company_id = JS.company_id
